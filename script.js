@@ -53,8 +53,7 @@ const loadAllImgs = async function (imgsArr) {
 
 const mapAsync = async function (imgsArr, imgFunction) {
   try {
-    const imgsArrCopy = imgsArr.map((img) => imgFunction(img));
-    return await Promise.all(imgsArrCopy);
+    return await Promise.all(imgsArr.map((img) => imgFunction(img)));
   } catch (err) {
     console.error(`Masz lipe (${err})`);
   }
