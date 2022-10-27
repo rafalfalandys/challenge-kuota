@@ -43,26 +43,26 @@ const loadAllImgs = async function (imgsArr) {
 ///////////////////////////// CHALLENGE 3 ///////////////////////////////
 /////////////////////////// Array.prototype /////////////////////////////
 
-Array.prototype.mapAsync = async function (imgsArr, imgFunction) {
+Array.prototype.mapAsync = async function (imgFunction) {
   try {
-    // const
+    const imgs = await Promise.all(this.map((img) => imgFunction(img)));
+    console.log(imgs);
+    return imgs;
   } catch (err) {
     console.log(`Masz lipe (${err})`);
   }
 };
 
-// const mapAsync = async function (imgsArr, imgFunction) {
-//   try {
-//     const imgsArrCopy = imgsArr.map((img) => imgFunction(img));
-//     return await Promise.all(imgsArrCopy);
-//   } catch (err) {
-//     console.error(`Masz lipe (${err})`);
-//   }
-// };
+[picsum1, picsum2, picsum3]
+  .mapAsync(createImg)
+  .forEach((img) => img.classList.add("parallel"));
 
 // const sorryButICanOnlyUseAwaitInsideAsyncFunction = async function () {
-//   const imgs = await mapAsync([picsum1, picsum2, picsum3], createImg);
-//   return imgs.forEach((img) => img.classList.add("parallel"));
+//   const newImgsArr = [picsum1, picsum2, picsum3]
+//     .mapAsync(createImg)
+//     .forEach((img) => img.classList.add("parallel"));
+
+//   console.log(newImgsArr);
 // };
 
 // sorryButICanOnlyUseAwaitInsideAsyncFunction();
