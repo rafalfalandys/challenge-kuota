@@ -40,17 +40,21 @@ const loadAllImgs = async function (imgsArr) {
 // loadAllImgs([picsum1, picsum2, picsum3]);
 
 /////////////////////////////////////////////////////////////////////////
-///////////////////////////// CHALLENGE 2 ///////////////////////////////
-////////////////////////// funkcja w funkcji ////////////////////////////
+///////////////////////////// CHALLENGE 3 ///////////////////////////////
+/////////////////////////// Array.prototype /////////////////////////////
+
+// Array.prototype.mapAsync = async function (imgsArr, imgFunction){
+//   try {
+
+//   } catch (err) {
+//     console.error('Masz lipe');
+//   }
+// }
 
 const mapAsync = async function (imgsArr, imgFunction) {
   try {
-    // const imgsArrCopy = imgsArr.map((img) => imgFunction(img));
-    // console.log(imgsArrCopy);
     const imgsArrCopy = imgsArr.map((img) => imgFunction(img));
-    const imgsArrCopy2 = await Promise.all(imgsArrCopy);
-    console.log(imgsArrCopy2);
-    return imgsArrCopy2;
+    return await Promise.all(imgsArrCopy);
   } catch (err) {
     console.error(`Masz lipe (${err})`);
   }
