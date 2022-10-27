@@ -48,11 +48,24 @@ const loadAllImgs = async function (imgsArr) {
 const mapAsync = async function (imgsArr, imgFunction) {
   try {
     const imgs = await Promise.all(imgsArr.map((img) => imgFunction(img)));
-    imgs.forEach((img) => img.classList.add("parallel"));
+    return imgs;
   } catch (err) {
-    console.error("Masz lipe");
+    console.error(`Masz lipe (${err})`);
   }
 };
+
+const imagesArr = mapAsync([picsum1, picsum2, picsum3], createImg);
+console.log(imagesArr);
+imagesArr.forEach((img) => img.classList.add("parallel"));
+
+// const mapAsync = async function (imgsArr, imgFunction) {
+//   try {
+//     const imgs = await Promise.all(imgsArr.map((img) => imgFunction(img)));
+//     imgs.forEach((img) => img.classList.add("parallel"));
+//   } catch (err) {
+//     console.error("Masz lipe");
+//   }
+// };
 // mapAsync([picsum1, picsum2, picsum3], createImg);
 
 /////////////////////////// wersja z klasą /////////////////////////////
