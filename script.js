@@ -29,11 +29,8 @@ const loadAllImgs = async function (imgsArr) {
   try {
     let imgsArrCopy = [];
     imgsArr.forEach((img) => imgsArrCopy.push(createImg(img)));
-    console.log(imgsArrCopy);
     const imgs = await Promise.all(imgsArrCopy);
-    console.log(typeof imgs);
     imgs.forEach((img) => img.classList.add("parallel"));
-    console.log(imgs);
   } catch (err) {
     console.log("Masz lipę ze wszystkimi obrazkami");
   }
@@ -48,32 +45,12 @@ const loadAllImgs = async function (imgsArr) {
 const mapAsync = async function (imgsArr, imgFunction) {
   try {
     const imgs = await Promise.all(imgsArr.map((img) => imgFunction(img)));
-    imgs.forEach((img) => img.classList.add("parallel"));
+    return imgs;
   } catch (err) {
-    console.error("Masz lipe");
+    console.error(`Masz lipe (${err})`);
   }
 };
-// mapAsync([picsum1, picsum2, picsum3], createImg);
 
-/////////////////////////// wersja z klasą /////////////////////////////
-
-class ImgsArrCl {
-  constructor(imgsArr) {
-    this.imgsArr = imgsArr;
-  }
-
-  mapAsync = async function (imgFunction) {
-    try {
-      const imgs = await Promise.all(
-        this.imgsArr.map((img) => imgFunction(img))
-      );
-      imgs.forEach((img) => img.classList.add("parallel"));
-    } catch (err) {
-      console.error("Masz lipe");
-    }
-  };
-}
-
-const images = new ImgsArrCl([picsum1, picsum2, picsum3]);
-
-images.mapAsync(createImg);
+const imagesArr = mapAsync([picsum1, picsum2, picsum3], createImg);
+console.log(imagesArr);
+imagesArr.forEach((img) => img.classList.add("parallel"));
