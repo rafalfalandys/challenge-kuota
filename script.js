@@ -29,11 +29,9 @@ const loadAllImgs = async function (imgsArr) {
   try {
     let imgsArrCopy = [];
     imgsArr.forEach((img) => imgsArrCopy.push(createImg(img)));
-    console.log(imgsArrCopy);
     const imgs = await Promise.all(imgsArrCopy);
-    console.log(typeof imgs);
-    imgs.forEach((img) => img.classList.add("parallel"));
     console.log(imgs);
+    imgs.forEach((img) => img.classList.add("parallel"));
   } catch (err) {
     console.log("Masz lipę ze wszystkimi obrazkami");
   }
@@ -47,46 +45,18 @@ const loadAllImgs = async function (imgsArr) {
 
 const mapAsync = async function (imgsArr, imgFunction) {
   try {
-    const imgs = await Promise.all(imgsArr.map((img) => imgFunction(img)));
-    return imgs;
+    const imgsArrCopy = imgsArr.map((img) => imgFunction(img));
+    return await Promise.all(imgsArrCopy);
+    // console.log(imgsArrCopy2);
+    // return imgsArrCopy2;
   } catch (err) {
     console.error(`Masz lipe (${err})`);
   }
 };
 
-const imagesArr = mapAsync([picsum1, picsum2, picsum3], createImg);
-console.log(imagesArr);
-imagesArr.forEach((img) => img.classList.add("parallel"));
+const sorryButICanOnlyUseAwaitInsideAsyncFunction = async function () {
+  const imgs = await mapAsync([picsum1, picsum2, picsum3], createImg);
+  return imgs.forEach((img) => img.classList.add("parallel"));
+};
 
-// const mapAsync = async function (imgsArr, imgFunction) {
-//   try {
-//     const imgs = await Promise.all(imgsArr.map((img) => imgFunction(img)));
-//     imgs.forEach((img) => img.classList.add("parallel"));
-//   } catch (err) {
-//     console.error("Masz lipe");
-//   }
-// };
-// mapAsync([picsum1, picsum2, picsum3], createImg);
-
-/////////////////////////// wersja z klasą /////////////////////////////
-
-class ImgsArrCl {
-  constructor(imgsArr) {
-    this.imgsArr = imgsArr;
-  }
-
-  mapAsync = async function (imgFunction) {
-    try {
-      const imgs = await Promise.all(
-        this.imgsArr.map((img) => imgFunction(img))
-      );
-      imgs.forEach((img) => img.classList.add("parallel"));
-    } catch (err) {
-      console.error("Masz lipe");
-    }
-  };
-}
-
-const images = new ImgsArrCl([picsum1, picsum2, picsum3]);
-
-images.mapAsync(createImg);
+sorryButICanOnlyUseAwaitInsideAsyncFunction();
