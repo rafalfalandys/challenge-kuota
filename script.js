@@ -43,13 +43,13 @@ const loadAllImgs = async function (imgsArr) {
 ///////////////////////////// CHALLENGE 3 ///////////////////////////////
 /////////////////////////// Array.prototype /////////////////////////////
 
-// Array.prototype.mapAsync = asyncFunction (imgsArr, imgFunction) {
-//   try {
-//     // const
-//   } catch (err) {
-//     console.log(`Masz lipe (${err})`);
-//   }
-// };
+Array.prototype.mapAsync = async function (imgsArr, imgFunction) {
+  try {
+    // const
+  } catch (err) {
+    console.log(`Masz lipe (${err})`);
+  }
+};
 
 // const mapAsync = async function (imgsArr, imgFunction) {
 //   try {
